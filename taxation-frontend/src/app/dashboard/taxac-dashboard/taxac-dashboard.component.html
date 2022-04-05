@@ -1,0 +1,51 @@
+<div>
+    <table [border]="1">
+        <tr>
+            <td>
+                <div>
+                    <h6>Username</h6>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <h6>Calculate Tax</h6>
+                </div>
+            </td>
+            
+
+            <td>
+                <div>
+                    <h6>Change Role</h6>
+                </div>
+            </td>
+        </tr>
+
+
+        <tr *ngFor = "let user of users">
+            <td>
+                <div>
+                    <h6>{{user.email}}</h6>
+                </div>
+            </td>
+            <td>
+                <div *ngIf="!user.tax.taxCalculated">
+                    <button (click)="calculateTax(user._id)">Calculate Tax</button>
+                </div>
+                <div *ngIf="user.tax.taxCalculated">
+                    <p>{{user.tax.taxAmount}}</p>
+                    <p *ngIf="!user.tax.taxPaid">Due</p>
+                    <p *ngIf="user.tax.taxPaid">Paid</p>
+                    <!-- <button (click)="calculateTax(user._id)">Calculate Tax</button> -->
+                </div>
+            </td>
+
+            <td>
+                <div>
+                    <button *ngIf="user.role!='tax-ac'" (click)="makeTaxAc(user._id)">Make Tax Accountant</button>
+                    <button *ngIf="user.role!='admin'" (click)="makeAdmin(user._id)">Make Admin</button>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+</div>

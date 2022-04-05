@@ -1,0 +1,28 @@
+<div style="margin-left: 20%;">Logout</div>
+<form *ngIf="!this.user.file" [formGroup]="filetax" (ngSubmit)="onFileTax()">
+
+    <label for="salary">Salary: </label>
+    <input id="salary" type="number" formControlName="salary">
+  
+    <label for="stocks">Stocks: </label>
+    <input id="stocks" type="number" formControlName="stocks">
+
+    <label for="others">Others: </label>
+    <input id="others" type="number" formControlName="others">
+    <button type="submit" [disabled]="!filetax.valid">Submit</button>
+  </form>
+  <div *ngIf="this.user.file">
+    {{this.user.file && !this.user.calculated}}
+    <p *ngIf="(!this.user.caculated)">
+      Your tax is not calculated yet by Tax accountant or Admin.
+    </p>
+    <p *ngIf="this.user.calculated">
+        <label for="tax">Tax : {{this.user.tax}}</label>
+    </p>
+  </div>
+  <form *ngIf="this.user.file" [formGroup]="paytax" (ngSubmit)="onPay()">
+    <button *ngIf="this.user.calculated" type="submit">Pay Tax</button>
+  </form>
+  <div *ngIf="this.user.paid">
+    <p>You have paid your tax</p>
+  </div>
